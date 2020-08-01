@@ -1,0 +1,7 @@
+{
+    "tableName": "users_search",
+    "partitionKeyName": "id",
+    "partitionKeyType": "S",
+    "sortKeyName": "repo",
+    "sortKeyType": "S"
+}
