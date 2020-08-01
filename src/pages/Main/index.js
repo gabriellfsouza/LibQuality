@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import {
   Container, Header, ContentCard, SearchArea, StyledTable,
 } from './styles';
