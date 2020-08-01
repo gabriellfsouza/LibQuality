@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import {
   Container, Header, ContentCard, SearchArea, StyledTable,
 } from './styles';
+import { findRepoIssues } from '../../services/issues';
 
 function Main() {
+  const [repos, setRepos] = useState([]);
+  const [search, setSearch] = useState('');
+
+  const handleSearchRepo = useCallback(async () => {
+    debugger;
+    if (!search) return;
+    try {
+      const response = await findRepoIssues({ repoSearch: search });
+      console.log(response);
+      setSearch('');
+    } catch (error) {
+      console.log(error);
+    }
+  }, [search]);
+
   return (
     <Container>
       <Header>
@@ -17,8 +33,8 @@ function Main() {
       </Header>
       <ContentCard>
         <SearchArea>
-          <input placeholder="Library's name" />
-          <Button>Search</Button>
+          <input placeholder="Library's name" value={search} onChange={(e) => setSearch(e.target.value)} />
+          <Button onClick={handleSearchRepo}>Search</Button>
         </SearchArea>
         <StyledTable striped hover>
           <thead>

@@ -1,0 +1,12 @@
+{
+  "mutableParametersState": {
+    "permissions": {
+      "auth": {
+        "libquality25e0e21a": [
+          "read"
+        ]
+      }
+    }
+  },
+  "lambdaLayers": []
+}
