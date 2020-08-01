@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "libquality_identitypool",
+    "identityPoolName": "libquality25e0e21a_identitypool_25e0e21a",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "LibQuaa169445d",
-    "userPoolName": "libquality_userpool",
+    "resourceNameTruncated": "libqua25e0e21a",
+    "userPoolName": "libquality25e0e21a_userpool_25e0e21a",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -14,7 +14,7 @@
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
-    "defaultPasswordPolicy": true,
+    "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
@@ -28,16 +28,11 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "LibQuaa169445d_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "libqua25e0e21a_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "useDefault": "manual",
+    "sharedId": "25e0e21a",
+    "resourceName": "libquality25e0e21a",
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "LibQualityAuth",
-    "userPoolGroups": false,
-    "adminQueries": false,
-    "triggers": "{}",
-    "hostedUI": true,
-    "userPoolGroupList": [],
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -50,15 +45,7 @@
             "Arn"
         ]
     },
-    "parentStack": {
-        "Ref": "AWS::StackId"
-    },
-    "permissions": [],
-    "dependsOn": [],
-    "thirdPartyAuth": true,
-    "authProviders": [],
-    "hostedUIDomainName": "libqualityoauthflow",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost:3000/\"],\"LogoutURLs\":[\"https://localhost:3000/\"]}"
+    "useDefault": "default",
+    "userPoolGroupList": [],
+    "dependsOn": []
 }

@@ -1,21 +1,19 @@
 {
     "dev": {
         "awscloudformation": {
-            "AuthRoleName": "amplify-libquality-dev-93307-authRole",
-            "UnauthRoleArn": "arn:aws:iam::197557751510:role/amplify-libquality-dev-93307-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::197557751510:role/amplify-libquality-dev-93307-authRole",
+            "AuthRoleName": "amplify-libquality-dev-172104-authRole",
+            "UnauthRoleArn": "arn:aws:iam::197557751510:role/amplify-libquality-dev-172104-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::197557751510:role/amplify-libquality-dev-172104-authRole",
             "Region": "us-east-1",
-            "DeploymentBucketName": "amplify-libquality-dev-93307-deployment",
-            "UnauthRoleName": "amplify-libquality-dev-93307-unauthRole",
-            "StackName": "amplify-libquality-dev-93307",
-            "StackId": "arn:aws:cloudformation:us-east-1:197557751510:stack/amplify-libquality-dev-93307/29a6c390-d3f3-11ea-be84-0a7396047ff3",
-            "AmplifyAppId": "d1hyhk4dz7ffzu"
+            "DeploymentBucketName": "amplify-libquality-dev-172104-deployment",
+            "UnauthRoleName": "amplify-libquality-dev-172104-unauthRole",
+            "StackName": "amplify-libquality-dev-172104",
+            "StackId": "arn:aws:cloudformation:us-east-1:197557751510:stack/amplify-libquality-dev-172104/8783c850-d434-11ea-8174-126c97cb5bc1",
+            "AmplifyAppId": "d3j50oizzyb9bf"
         },
         "categories": {
             "auth": {
-                "LibQualityAuth": {
-                    "hostedUIProviderCreds": "[]"
-                }
+                "libquality25e0e21a": {}
             }
         }
     }
