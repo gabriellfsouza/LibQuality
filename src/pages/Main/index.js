@@ -52,7 +52,6 @@ function Main() {
           && error.response.data.status
         ) setAlertContent({ title: error.response.data.status, body: error.response.data.message });
         else setAlertContent({ title: 'error', body: 'Search failed.' });
-        console.log(error);
       }
       setLoading(false);
     }, [search],
@@ -92,17 +91,15 @@ function Main() {
           </thead>
           <tbody>
             {repos.map((repo, index) => (
-              <tr key={repo.repo}>
+              <tr data-testid={repo.repo} key={repo.repo}>
                 <td>{index + 1}</td>
                 <td>{repo.repo}</td>
                 <td>{repo.openIssuesCount}</td>
                 <td>
-                  {repo.medianTimeOpen}
-                  d
+                  {`${repo.medianTimeOpen}d`}
                 </td>
                 <td>
-                  {repo.standardDeviation}
-                  d
+                  {`${repo.standardDeviation}d`}
                 </td>
               </tr>
             ))}
