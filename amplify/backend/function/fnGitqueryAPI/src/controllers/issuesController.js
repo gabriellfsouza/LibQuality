@@ -8,12 +8,17 @@ class IssuesController {
    */
   async show(request, response) {
     const { repoSearch } = request.query;
-    const result = await showRepoIssuesService.run({ repoSearch });
-    const { identity } = request.apiGateway.event.requestContext;
-    const temp = identity.cognitoAuthenticationProvider.split(':');
-    const sub = temp[temp.length - 1];
-
-    return response.json({ ...result, sub });
+    let user = '';
+    try {
+      const { identity } = request.apiGateway.event.requestContext;
+      const temp = identity.cognitoAuthenticationProvider.split(':');
+      user = temp[temp.length - 1];
+    } catch (error) {
+      console.warn('WARNING', 'User not founded');
+    }
+    const result = await showRepoIssuesService.run({ repoSearch, user });
+    console.log('ISSUE_RESULT', result);
+    return response.status(200).json({ ...result, user });
   }
 }
 

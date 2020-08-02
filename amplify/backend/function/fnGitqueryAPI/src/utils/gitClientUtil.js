@@ -30,7 +30,7 @@ class GitClientUtil {
    * @param {{repoSearch:String,per_page:(Number|String),page:(Number|String)}} param0
    */
   getRepoIssues({ repoSearch, per_page, page }) {
-    return this.api.get(`repos/${repoSearch}`, {
+    return this.api.get(`repos/${repoSearch}/issues`, {
       params: {
         per_page,
         page,

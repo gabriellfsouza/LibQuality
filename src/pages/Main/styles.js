@@ -30,7 +30,7 @@ export const ContentCard = styled.section`
   margin-bottom: 50px;
 `;
 
-export const SearchArea = styled.div`
+export const SearchArea = styled.form`
   display: flex;
   flex-direction: row;
   height: 25px;
