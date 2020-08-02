@@ -8,6 +8,10 @@ See the License for the specific language governing permissions and limitations 
 
 /* Amplify Params - DO NOT EDIT
 	AUTH_LIBQUALITY25E0E21A_USERPOOLID
+	ENV
+	REGION
+	STORAGE_LIBQUALITYDB_ARN
+	STORAGE_LIBQUALITYDB_NAME
 Amplify Params - DO NOT EDIT */
 
 const express = require('express');

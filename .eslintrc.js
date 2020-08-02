@@ -20,5 +20,8 @@ module.exports = {
     "rules": {
       "import/prefer-default-export": "off",
       "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
+      "class-methods-use-this": "off",
+      "camelcase":"off",
+      "max-len": ["error", { "code": 180 }],
     }
 };

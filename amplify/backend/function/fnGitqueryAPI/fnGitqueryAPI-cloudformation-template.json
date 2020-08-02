@@ -13,6 +13,14 @@
 		"authlibquality25e0e21aUserPoolId": {
 			"Type": "String",
 			"Default": "authlibquality25e0e21aUserPoolId"
+		},
+		"storagelibqualitydbName": {
+			"Type": "String",
+			"Default": "storagelibqualitydbName"
+		},
+		"storagelibqualitydbArn": {
+			"Type": "String",
+			"Default": "storagelibqualitydbArn"
 		}
 	},
 	"Conditions": {
@@ -62,6 +70,12 @@
 						},
 						"AUTH_LIBQUALITY25E0E21A_USERPOOLID": {
 							"Ref": "authlibquality25e0e21aUserPoolId"
+						},
+						"STORAGE_LIBQUALITYDB_NAME": {
+							"Ref": "storagelibqualitydbName"
+						},
+						"STORAGE_LIBQUALITYDB_ARN": {
+							"Ref": "storagelibqualitydbArn"
 						}
 					}
 				},
@@ -76,7 +90,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-libquality-dev-172104-deployment",
-					"S3Key": "amplify-builds/fnGitqueryAPI-2f636177514f44385364-build.zip"
+					"S3Key": "amplify-builds/fnGitqueryAPI-454977356e374b78745a-build.zip"
 				}
 			}
 		},
@@ -212,6 +226,38 @@
 											{
 												"Ref": "authlibquality25e0e21aUserPoolId"
 											}
+										]
+									]
+								}
+							]
+						},
+						{
+							"Effect": "Allow",
+							"Action": [
+								"dynamodb:Put*",
+								"dynamodb:Create*",
+								"dynamodb:BatchWriteItem",
+								"dynamodb:Get*",
+								"dynamodb:BatchGetItem",
+								"dynamodb:List*",
+								"dynamodb:Describe*",
+								"dynamodb:Scan",
+								"dynamodb:Query",
+								"dynamodb:Update*",
+								"dynamodb:RestoreTable*"
+							],
+							"Resource": [
+								{
+									"Ref": "storagelibqualitydbArn"
+								},
+								{
+									"Fn::Join": [
+										"/",
+										[
+											{
+												"Ref": "storagelibqualitydbArn"
+											},
+											"index/*"
 										]
 									]
 								}
