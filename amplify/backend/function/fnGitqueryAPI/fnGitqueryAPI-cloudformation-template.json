@@ -90,7 +90,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-libquality-dev-172104-deployment",
-					"S3Key": "amplify-builds/fnGitqueryAPI-454977356e374b78745a-build.zip"
+					"S3Key": "amplify-builds/fnGitqueryAPI-6e3163722b784b646977-build.zip"
 				}
 			}
 		},

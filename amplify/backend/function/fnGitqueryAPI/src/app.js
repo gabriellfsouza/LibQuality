@@ -7,100 +7,146 @@ See the License for the specific language governing permissions and limitations 
 */
 
 /* Amplify Params - DO NOT EDIT
-	AUTH_LIBQUALITY25E0E21A_USERPOOLID
-	ENV
-	REGION
-	STORAGE_LIBQUALITYDB_ARN
-	STORAGE_LIBQUALITYDB_NAME
+  AUTH_LIBQUALITY25E0E21A_USERPOOLID
+  ENV
+  REGION
+  STORAGE_LIBQUALITYDB_ARN
+  STORAGE_LIBQUALITYDB_NAME
 Amplify Params - DO NOT EDIT */
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
+require('./errors/CustomError');
+const routes = require('./routes');
 
-// declare a new express app
-const app = express();
-app.use(bodyParser.json());
-app.use(awsServerlessExpressMiddleware.eventContext());
+class App {
+  constructor() {
+    // declare a new express app
+    this.server = express();
+  }
 
-// Enable CORS for all methods
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+  middlewares() {
+    this.server.use(bodyParser.json());
+    this.server.use(awsServerlessExpressMiddleware.eventContext());
 
-/** ********************
- * Example get method *
- ********************* */
+    // Enable CORS for all methods
+    this.server.use((req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept',
+      );
+      next();
+    });
+  }
 
-app.get('/issues', (req, res) => {
-  // Add your code here
-  const { identity } = req.apiGateway.event.requestContext;
-  const temp = identity.cognitoAuthenticationProvider.split(':');
-  const sub = temp[temp.length - 1];
-  console.log('request', req);
-  console.log('header', req.apiGateway.event.requestContext.identity);
-  console.log('headers', JSON.stringify(req.headers, null, 2));
-  res.json({
-    success: 'get call succeed!', url: req.url, identity, sub,
-  });
-});
+  errHandlers() {
+    this.server.use((err, request, response, _) => {
+      if (err instanceof CustomError) {
+        return response.status(err.statusCode).json({
+          status: 'error',
+          message: err.message,
+        });
+      }
 
-app.get('/issues/*', (req, res) => {
-  // Add your code here
-  console.log('request', req);
-  console.log('issues', JSON.stringify(awsServerlessExpressMiddleware.eventContext(), null, 2));
-  res.json({ success: 'get call succeed!', url: req.url });
-});
+      return response.status(500).json({
+        status: 'error',
+        message: err.message,
+      });
+    });
+  }
 
-/** **************************
-* Example post method *
-*************************** */
+  routes() {
+    this.server.use('/', routes);
+  }
+}
 
-app.post('/issues', (req, res) => {
-  // Add your code here
-  res.json({ success: 'post call succeed!', url: req.url, body: req.body });
-});
+module.exports = new App().server;
+// const app = express();
+// app.use(bodyParser.json());
+// app.use(awsServerlessExpressMiddleware.eventContext());
 
-app.post('/issues/*', (req, res) => {
-  // Add your code here
-  res.json({ success: 'post call succeed!', url: req.url, body: req.body });
-});
+// // Enable CORS for all methods
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
 
-/** **************************
-* Example put method *
-*************************** */
+// app.use(routes);
 
-app.put('/issues', (req, res) => {
-  // Add your code here
-  res.json({ success: 'put call succeed!', url: req.url, body: req.body });
-});
+// /** ********************
+//  * Example get method *
+//  ********************* */
 
-app.put('/issues/*', (req, res) => {
-  // Add your code here
-  res.json({ success: 'put call succeed!', url: req.url, body: req.body });
-});
+// app.get('/issues', (req, res) => {
+//   // Add your code here
+//   const { identity } = req.apiGateway.event.requestContext;
+//   const temp = identity.cognitoAuthenticationProvider.split(':');
+//   const sub = temp[temp.length - 1];
+//   console.log('request', req);
+//   console.log('header', req.apiGateway.event.requestContext.identity);
+//   console.log('headers', JSON.stringify(req.headers, null, 2));
+//   res.json({
+//     success: 'get call succeed!', url: req.url, identity, sub,
+//   });
+// });
 
-/** **************************
-* Example delete method *
-*************************** */
+// app.get('/issues/*', (req, res) => {
+//   // Add your code here
+//   console.log('request', req);
+//   console.log('issues', JSON.stringify(awsServerlessExpressMiddleware.eventContext(), null, 2));
+//   res.json({ success: 'get call succeed!', url: req.url });
+// });
 
-app.delete('/issues', (req, res) => {
-  // Add your code here
-  res.json({ success: 'delete call succeed!', url: req.url });
-});
+// /** **************************
+// * Example post method *
+// *************************** */
 
-app.delete('/issues/*', (req, res) => {
-  // Add your code here
-  res.json({ success: 'delete call succeed!', url: req.url });
-});
+// app.post('/issues', (req, res) => {
+//   // Add your code here
+//   res.json({ success: 'post call succeed!', url: req.url, body: req.body });
+// });
 
-app.listen(3000, () => {
-  console.log('App started');
-});
+// app.post('/issues/*', (req, res) => {
+//   // Add your code here
+//   res.json({ success: 'post call succeed!', url: req.url, body: req.body });
+// });
 
-// Export the app object. When executing the application local this does nothing. However,
-// to port it to AWS Lambda we will create a wrapper around that will load the app from
-// this file
-module.exports = app;
+// /** **************************
+// * Example put method *
+// *************************** */
+
+// app.put('/issues', (req, res) => {
+//   // Add your code here
+//   res.json({ success: 'put call succeed!', url: req.url, body: req.body });
+// });
+
+// app.put('/issues/*', (req, res) => {
+//   // Add your code here
+//   res.json({ success: 'put call succeed!', url: req.url, body: req.body });
+// });
+
+// /** **************************
+// * Example delete method *
+// *************************** */
+
+// app.delete('/issues', (req, res) => {
+//   // Add your code here
+//   res.json({ success: 'delete call succeed!', url: req.url });
+// });
+
+// app.delete('/issues/*', (req, res) => {
+//   // Add your code here
+//   res.json({ success: 'delete call succeed!', url: req.url });
+// });
+
+// app.listen(3000, () => {
+//   console.log('App started');
+// });
+
+// // Export the app object. When executing the application local this does nothing. However,
+// // to port it to AWS Lambda we will create a wrapper around that will load the app from
+// // this file
+// module.exports = app;

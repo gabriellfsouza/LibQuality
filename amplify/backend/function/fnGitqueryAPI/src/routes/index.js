@@ -1,8 +1,8 @@
 const { Router } = require('express');
+const issuesController = require('../controllers/issuesController');
 
-/** @type {Router} */
-const router = new Router();
+const router = Router();
 
-router.get('/issues', (req, res) => {
-  res.json({ ok: 'teste' });
-});
+router.get('/issues', issuesController.show);
+
+module.exports = router;
