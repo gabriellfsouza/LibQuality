@@ -1,0 +1,19 @@
+{
+  "mutableParametersState": {
+    "permissions": {
+      "auth": {
+        "libquality25e0e21a": [
+          "read"
+        ]
+      },
+      "storage": {
+        "libqualitydb": [
+          "create",
+          "read",
+          "update"
+        ]
+      }
+    }
+  },
+  "lambdaLayers": []
+}

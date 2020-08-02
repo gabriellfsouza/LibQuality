@@ -1,0 +1,23 @@
+{
+  "name": "fnGitqueryAPI",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "uuidv4": "^6.2.1",
+    "aws-sdk": "^2.725.0",
+    "aws-serverless-express": "^3.3.5",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "axios": "^0.19.2",
+    "math-stats": "^0.4.0",
+    "date-fns": "^2.15.0",
+    "express-async-errors": "^3.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

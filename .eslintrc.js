@@ -7,6 +7,9 @@ module.exports = {
         "plugin:react/recommended",
         "airbnb"
     ],
+    "globals":{
+      "CustomError": "readonly"
+    },
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -19,5 +22,16 @@ module.exports = {
     ],
     "rules": {
       "import/prefer-default-export": "off",
+      "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
+      "class-methods-use-this": "off",
+      "camelcase":"off",
+      "max-len": ["error", { "code": 180 }],
+      "no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "_"
+        }
+      ],
+      "no-tabs": "off"
     }
 };
