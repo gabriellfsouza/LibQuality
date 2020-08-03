@@ -50,7 +50,7 @@ class ShowRepoIssuesService {
       const currentDate = new Date();
       const daysOpenArr = issues.map((issue) => differenceInDays(currentDate, parseISO(issue.created_at)));
       const openedMedian = mean(daysOpenArr);
-      const openedDeviation = Math.round(standardDeviation(daysOpenArr));
+      const openedDeviation = standardDeviation(daysOpenArr);
       console.log({ daysOpenArr, openedDeviation, openedMedian });
       const searchRecord = new SearchRecord({ repo: repoSearch, user });
       const record = await searchRecord.create();
