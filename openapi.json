@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "gitquery",
+    "version": "2018-05-24T17:52:00Z"
+  },
+  "servers": [
+    {
+      "url": "https://04oroj71y0.execute-api.us-east-1.amazonaws.com/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "/dev"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/issues": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "searchRepo",
+            "schema": {
+              "title": "Request Schema",
+              "type": "object",
+              "properties": {
+                "searchRepo": {
+                  "title": "Full repo name ( facebook/react )",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Headers": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {}
+          }
+        }
+      },
+      "x-amazon-apigateway-any-method": {
+        "parameters": [
+          {
+            "name": "repoSearch",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get issues data from a given repository.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "sigv4": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RequestSchema": {
+        "title": "Request Schema",
+        "type": "object",
+        "properties": {
+          "searchRepo": {
+            "title": "Full repo name ( facebook/react )",
+            "type": "string"
+          }
+        }
+      },
+      "ResponseSchema": {
+        "title": "Response Schema",
+        "type": "object",
+        "properties": {
+          "medianTimeOpen": {
+            "type": "number"
+          },
+          "standardDeviation": {
+            "type": "number"
+          },
+          "openIssuesCount": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "sigv4": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "x-amazon-apigateway-authtype": "awsSigv4"
+      }
+    }
+  }
+}
