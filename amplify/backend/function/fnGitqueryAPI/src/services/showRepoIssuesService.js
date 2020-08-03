@@ -1,4 +1,4 @@
-const { standardDeviation, median } = require('math-stats');
+const { standardDeviation, mean } = require('math-stats');
 const { differenceInDays, parseISO } = require('date-fns');
 
 const gitClientUtil = require('../utils/gitClientUtil');
@@ -49,8 +49,9 @@ class ShowRepoIssuesService {
 
       const currentDate = new Date();
       const daysOpenArr = issues.map((issue) => differenceInDays(currentDate, parseISO(issue.created_at)));
-      const openedMedian = median(daysOpenArr);
+      const openedMedian = mean(daysOpenArr);
       const openedDeviation = Math.round(standardDeviation(daysOpenArr));
+      console.log({ daysOpenArr, openedDeviation, openedMedian });
       const searchRecord = new SearchRecord({ repo: repoSearch, user });
       const record = await searchRecord.create();
       return {

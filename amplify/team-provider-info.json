@@ -14,6 +14,51 @@
         "categories": {
             "auth": {
                 "libquality25e0e21a": {}
+            },
+            "function": {
+                "fnGitqueryAPI": {}
+            }
+        }
+    },
+    "homolog": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-libquality-homolog-124212-authRole",
+            "UnauthRoleArn": "arn:aws:iam::197557751510:role/amplify-libquality-homolog-124212-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::197557751510:role/amplify-libquality-homolog-124212-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-libquality-homolog-124212-deployment",
+            "UnauthRoleName": "amplify-libquality-homolog-124212-unauthRole",
+            "StackName": "amplify-libquality-homolog-124212",
+            "StackId": "arn:aws:cloudformation:us-east-1:197557751510:stack/amplify-libquality-homolog-124212/bdc314f0-d4d6-11ea-9476-12d101416601",
+            "AmplifyAppId": "d3j50oizzyb9bf"
+        },
+        "categories": {
+            "auth": {
+                "libquality25e0e21a": {}
+            },
+            "function": {
+                "fnGitqueryAPI": {}
+            }
+        }
+    },
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-libquality-prod-124956-authRole",
+            "UnauthRoleArn": "arn:aws:iam::197557751510:role/amplify-libquality-prod-124956-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::197557751510:role/amplify-libquality-prod-124956-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-libquality-prod-124956-deployment",
+            "UnauthRoleName": "amplify-libquality-prod-124956-unauthRole",
+            "StackName": "amplify-libquality-prod-124956",
+            "StackId": "arn:aws:cloudformation:us-east-1:197557751510:stack/amplify-libquality-prod-124956/d2880c50-d4d7-11ea-8d4f-0ed4f058f52d",
+            "AmplifyAppId": "d3j50oizzyb9bf"
+        },
+        "categories": {
+            "auth": {
+                "libquality25e0e21a": {}
+            },
+            "function": {
+                "fnGitqueryAPI": {}
             }
         }
     }
