@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "lint": "eslint \"**/*.js\" --ignore-pattern node_modules/ --ignore-pattern build/",
     "test": "react-scripts test --watchAll false && cd ./amplify/backend/function/fnGitqueryAPI/src && npm run test",
-    "posttest": "echo ../../../../../",
+    "posttest": "cd ../../../../../",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
