@@ -1,68 +1,175 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# LibQuality
 
-## Available Scripts
+Welcome board of this quality measure tool for GitHub projects.
 
-In the project directory, you can run:
+- To search any project, you need to inform its full name (ex: facebook/react)
 
-### `yarn start`
+[LibQuality](https://release.d3j50oizzyb9bf.amplifyapp.com/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Architecture and Technologies
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This tool was designed using **AWS** technologies like **Amplify, DynamoDB, CloudFormation, Lambda, API Gateway, Cognito, CloudFront CDN and S3.**
 
-### `yarn test`
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+AWS Based architecture
 
-### `yarn build`
+The application was built to on Amplify CLI (serverless based application builder), because it's purpose of build scalable cloud-powered web applications faster. Amplify deliver a environment that enable you to build, deploy and deliver web apps, integrate with CloudFormation for it's Infrastructure as Code capabilities.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+API Gateway was used to manage all RESTFul requests and serves as a gateway calling the Lambda Function that process the request, calling the GitHub API and collecting data through a DynamoDB database.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The React frontend page is stored on a S3 bucket and served through CloudFront CDN.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+All API requests needs to be authenticated by Cognito first and then can be called.
 
-### `yarn eject`
+### Libraries
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The following main libraries was used in this project
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- react - frontend framework
+- date-fns - date/time manipulation
+- math-stats - mean and standard deviation calc
+- uuidv4 - uuid generator
+- jest - tests
+- axios - rest api that call the GitHub APIs from backend
+- express + aws_lambda_express - REST capabilities
+- aws-sdk - AWS infrastructure tools access
+- aws-amplify-react + aws-amplify - authentication, login interface, integrated REST calls
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Getting Started
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You need to create a AWS account (this can be done using a 12 months free account).
 
-## Learn More
+[AWS Free Tier](https://aws.amazon.com/free/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Environment Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### NodeJS + NPM + Yarn
 
-### Code Splitting
+Install nodejs according to your own environment.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+[Node.js](https://nodejs.org/en/)
 
-### Analyzing the Bundle Size
+Yarn is an optional tool and can be installed as a `npm` global package
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```bash
+npm install -g yarn
+```
 
-### Making a Progressive Web App
+### AWS CLI and Amplify CLI configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+You need to have AWS and Amplify CLIs configured before start, as the links below:
 
-### Advanced Configuration
+[AWS Command Line Interface](https://aws.amazon.com/cli/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+[Amplify Framework Documentation](https://docs.amplify.aws/start/getting-started/installation/q/integration/react)
 
-### Deployment
+### Configure AWS local credentials
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- Create and download (for tests purpose you can create an admin account) or you can create a policy based on [https://docs.amplify.aws/cli/usage/iam](https://docs.amplify.aws/cli/usage/iam)
+- Access the prompt
 
-### `yarn build` fails to minify
+```bash
+aws configure --profile [PROFILE_NAME]
+AWS Access Key ID [None]: [YOUR_PROFILE_ID]
+AWS Secret Access Key [None]: [YOUR_PROFILE_SECRET]
+Default region name [None]: [OPTIONAL]
+Default output format [None]: [OPTIONAL]
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Project Setup
+
+### Project and dependences
+
+```bash
+git clone https://github.com/gabriellfsouza/LibQuality
+cd LibQuality
+yarn
+```
+
+### Amplify environment
+
+```bash
+amplify env add
+Do you want to use an existing environment? (Y/n) N
+Enter a name for the environment [YOUR_ENVIRONMENT NAME]
+```
+
+Choose your editor
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%201.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%201.png)
+
+```bash
+Do you want to use an AWS profile? (Y/n) [Y]
+[CHOOSE_YOUR_PROFILE]
+```
+
+Wait while provisioning project
+
+```bash
+amplify push
+Are you sure you want to continue? (Y/n) [Y]
+```
+
+Wait while deploying the infrastructure/backend
+
+```bash
+yarn start
+```
+
+The following page will appear
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%202.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%202.png)
+
+To test the application run `yarn test`
+
+### API - Swagger OpenAPI
+
+The OpenAPI file is in the project base path named as `openapi.json`
+
+# Publishing / Continuous Delivering
+
+To publish and deliver your application ever when you merge your develop branch to release (for example) you can follow like below:
+
+- Create a new environment that will represent your production or homologation
+- Access aws console https://console.aws.amazon.com
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%203.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%203.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%204.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%204.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%205.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%205.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%206.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%206.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%207.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%207.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%208.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%208.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%209.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%209.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2010.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2010.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2011.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2011.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2012.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2012.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2013.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2013.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2014.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2014.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2015.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2015.png)
+
+Production
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2016.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2016.png)
+
+Notifications
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2017.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2017.png)
+
+![LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2018.png](LibQuality%209994974101e341c9b9f9ae4aea1f6a6b/Untitled%2018.png)
+
+Sample Application:
+
+[LibQuality](https://release.d3j50oizzyb9bf.amplifyapp.com/)
